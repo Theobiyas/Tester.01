@@ -1,0 +1,417 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="deskripsi" content="Website modern dengan login, pendaftaran, dan artikel inspiratif.">
+    <title>Test.0.1</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, #4e73df, #1cc88a);
+            color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+        nav {
+            background: #444;
+            text-align: center;
+            padding: 10px 0;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        nav a:hover {
+            background: #2e59d9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .content {
+            display: none;
+        }
+        .content.active {
+            display: block;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        .article-container {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .article {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .article h3 {
+            margin-bottom: 10px;
+        }
+        .article p {
+            font-size: 1em;
+            color: #666;
+        }
+        .article a {
+            text-decoration: none;
+            color: #1cc88a;
+            font-weight: bold;
+        }
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            background: #1cc88a;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        form button:hover {
+            background: #17a673;
+        }
+        #user-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        let registeredUsers = [];
+        let currentUser = null;
+
+        function registerUser() {
+            const username = document.getElementById('register-username').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+
+            if (registeredUsers.some(user => user.email === email)) {
+                alert('Email ini sudah digunakan. Silakan gunakan email lain.');
+                return;
+            }
+
+            registeredUsers.push({ username, email, password });
+            alert('Akun berhasil dibuat! Selamat datang, ' + username + '.');
+            showPage('login');
+        }
+
+        function loginUser() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            const user = registeredUsers.find(user => user.email === email && user.password === password);
+            if (!user) {
+                alert('Email atau password salah.');
+                return;
+            }
+
+            currentUser = user.username;
+            alert('Login berhasil! Selamat datang kembali, ' + currentUser + '.');
+            document.getElementById('user-info').textContent = 'Hai, ' + currentUser;
+            showPage('home');
+        }
+
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.content');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>test 01</h1>
+        <p>Inspirasi hidup dan kesuksesan</p>
+    </header>
+    <nav>
+        <a href="#" onclick="showPage('home')">Beranda</a>
+        <a href="#" onclick="showPage('login')">Login</a>
+        <a href="#" onclick="showPage('register')">Daftar</a>
+    </nav>
+    <div class="container">
+        <div id="home" class="content active">
+            <h2>Selamat Datang di Alam Kubur.Com!</h2>
+            <p>Jelajahi artikel menarik kami untuk inspirasi hidup.</p>
+            <div class="article-container">
+                <div class="article">
+                    <h3>Jangan Menjadi Pecundang</h3>
+                    <p>Tips membangun hidup independen dan bermakna.</p>
+                    <a href="#" onclick="showPage('article-budak')">Baca Selengkapnya</a>
+                </div>
+                <div class="article">
+                    <h3>Menjadi Kaya Raya</h3>
+                    <p>Strategi untuk mencapai kebebasan finansial.</p>
+                    <a href="#" onclick="showPage('article-kaya')">Baca Selengkapnya</a>
+                </div>
+                <div class="article">
+                    <h3>Pekerjaan Terbaik</h3>
+                    <p>Pilih karier yang mendatangkan penghasilan besar.</p>
+                    <a href="#" onclick="showPage('article-kerja')">Baca Selengkapnya</a>
+                </div>
+                <div class="article">
+                    <h3>Power Of Mindset</h3>
+                    <p>Gali potensi diri dengan mengubah pola pikir yang mendukung kesuksesan.</p>
+                    <a href="#" onclick="showPage('article-mindset')">Baca Selengkapnya</a>
+                </div>
+            </div>
+            <div id="user-info"></div>
+        </div>
+        <div id="login" class="content">
+            <h2>Login</h2>
+            <form onsubmit="event.preventDefault(); loginUser();">
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+        <div id="register" class="content">
+            <h2>Buat Akun</h2>
+            <form onsubmit="event.preventDefault(); registerUser();">
+                <input type="text" id="register-username" placeholder="Nama Lengkap" required>
+                <input type="email" id="register-email" placeholder="Email" required>
+                <input type="password" id="register-password" placeholder="Password" required>
+                <button type="submit">Daftar</button>
+            </form>
+        </div>
+        <!-- Artikel Power of Mindset -->
+        <div id="article-mindset" class="content">
+            <h2>Power Of Mindset</h2>
+            <p>Mindset adalah salah satu faktor paling kuat yang memengaruhi hidup kita. Dengan pola pikir yang tepat, kita dapat menghadapi tantangan dan mencapai tujuan yang lebih besar. Berikut adalah beberapa cara untuk mengembangkan mindset yang mendukung kesuksesan:
+
+1. Growth Mindset  
+   Percaya bahwa kemampuan kita dapat berkembang melalui usaha dan ketekunan. Ini memberi kita kekuatan untuk terus belajar dan beradaptasi.
+
+2. Pentingnya Positif Thinking  
+   Berfokus pada hal-hal positif meskipun menghadapi rintangan akan memperkuat ketahanan mental kita.
+
+3. Visualisasi Tujuan  
+   Melihat tujuan kita dengan jelas dalam pikiran membantu kita tetap fokus dan termotivasi untuk mencapainya.
+
+4. Pembelajaran Berkelanjutan  
+   Tidak pernah berhenti belajar adalah cara terbaik untuk berkembang dan sukses. Terus mencari pengetahuan dan keterampilan baru akan membuka lebih banyak peluang.  
+            </p>
+        </div>
+<!-- Artikel Jangan Menjadi Pecundag -->
+        <div id="article-budak" class="content">
+            <h2>Jangan Menjadi Pecundang</h2>
+            <p>Hidup sebagai "budak" modern sering kali tidak disadari. Rutinitas monoton, tuntutan tanpa batas, dan kehilangan arah adalah ciri utama. Jangan biarkan diri Anda terjebak dalam lingkaran ini. Bangun kehidupan independen dengan mengikuti beberapa prinsip dasar berikut ini:</p>
+            
+            <h3>1. Pahami Nilai Anda</h3>
+            <p>Jangan biarkan orang lain mendikte jalan hidup Anda. Kenali apa yang penting bagi Anda, baik itu keluarga, waktu luang, atau kebebasan. Anda berhak menentukan prioritas dalam hidup, dan itu harus sesuai dengan apa yang Anda percayai dan inginkan.</p>
+
+            <h3>2. Kelola Waktu dengan Bijak</h3>
+            <p>Waktu adalah aset yang paling berharga. Dalam dunia yang serba cepat ini, kita sering terjebak dalam rutinitas sehari-hari tanpa berpikir panjang. Kelola waktu Anda untuk hal-hal yang lebih bermakna dan produktif. Buatlah jadwal yang memungkinkan Anda untuk bekerja, belajar, dan beristirahat tanpa merasa terbebani.</p>
+
+            <h3>3. Fokus pada Tujuan Anda, Bukan Orang Lain</h3>
+            <p>Jangan terjebak dengan keinginan untuk menyenangkan orang lain. Fokuslah pada tujuan hidup Anda sendiri dan jalani kehidupan sesuai dengan impian Anda. Orang lain mungkin memiliki ekspektasi mereka, tetapi yang terpenting adalah Anda merasa puas dengan pilihan yang Anda buat.</p>
+
+            <h3>4. Bebaskan Diri dari Konsumerisme Berlebihan</h3>
+            <p>Banyak orang terjebak dalam perangkap konsumerisme yang tak ada habisnya. Membeli barang demi status sosial atau untuk memenuhi keinginan sementara hanya akan membuat Anda merasa kosong. Fokuslah pada apa yang benar-benar bernilai dan membangun kebahagiaan sejati, bukan sekadar memenuhi keinginan sesaat.</p>
+
+            <h3>5. Jangan Takut untuk Mengambil Risiko</h3>
+            <p>Hidup tanpa keberanian untuk mengambil risiko adalah hidup yang terkekang. Berani keluar dari zona nyaman Anda dan coba hal baru. Jangan takut gagal, karena kegagalan adalah bagian dari proses menuju kesuksesan. Jika Anda tidak mencoba, Anda tidak akan tahu sejauh mana potensi Anda bisa berkembang.</p>
+
+            <h3>6. Bangun Kemandirian Finansial</h3>
+            <p>Salah satu cara untuk membebaskan diri dari perbudakan adalah dengan menjadi mandiri secara finansial. Carilah cara untuk menghasilkan uang melalui bisnis sampingan, investasi, atau pengembangan keahlian baru. Dengan kemerdekaan finansial, Anda dapat mengontrol hidup Anda lebih baik tanpa harus bergantung pada pekerjaan yang menekan.</p>
+
+            <h3>7. Bangun Pola Pikir yang Kuat</h3>
+            <p>Pola pikir yang kuat adalah kunci untuk keluar dari kehidupan yang tertekan. Latihlah diri Anda untuk berpikir positif, fleksibel, dan kreatif dalam menghadapi tantangan hidup. Jangan biarkan diri Anda terjebak dalam pikiran negatif yang hanya akan menghambat kemajuan. Ubah cara pandang Anda dan mulailah melihat setiap rintangan sebagai peluang untuk tumbuh.</p>
+
+            <h3>8. Kelilingi Diri Anda dengan Orang yang Mendukung</h3>
+            <p>Lingkungan Anda memengaruhi kehidupan Anda. Cobalah untuk berada di sekitar orang-orang yang memiliki visi dan nilai yang sejalan dengan Anda. Mereka yang mendukung impian Anda akan memberikan energi positif yang akan mendorong Anda menuju kesuksesan. Jangan biarkan diri Anda terpengaruh oleh orang-orang yang memandang rendah kemampuan Anda.</p>
+
+            <h3>9. Jangan Takut untuk Mengucapkan Tidak</h3>
+            <p>Dalam dunia yang penuh dengan tuntutan dan permintaan dari berbagai pihak, penting untuk tahu kapan harus mengatakan tidak. Jangan merasa bersalah jika Anda menolak hal-hal yang tidak sejalan dengan tujuan hidup Anda. Mengatakan tidak adalah salah satu cara untuk menjaga keseimbangan dalam hidup dan memastikan Anda tidak terjebak dalam kewajiban yang menguras energi.</p>
+
+            <h3>10. Nikmati Proses Perjalanan Hidup</h3>
+            <p>Banyak orang terjebak dalam keinginan untuk segera mencapai tujuan mereka tanpa menikmati proses perjalanan itu sendiri. Hidup adalah sebuah perjalanan yang penuh dengan pengalaman dan pembelajaran. Nikmatilah setiap langkah yang Anda ambil, karena kebahagiaan sejati sering kali datang dari perjalanan itu sendiri, bukan hanya dari tujuan akhir.</p>
+
+            <p>Jangan biarkan diri Anda menjadi budak dalam kehidupan yang Anda jalani. Ambil kendali, buat keputusan yang bijak, dan bangun hidup yang sesuai dengan impian Anda. Anda berhak atas kebebasan, kebahagiaan, dan kesuksesan yang sejati.</p>
+        </div>
+
+        <!-- Artikel Menjadi Kaya Raya -->
+        <div id="article-kaya" class="content">
+            <h2>Menjadi Kaya Raya</h2>
+            <p>Menjadi kaya raya bukan hanya soal memiliki banyak uang, tetapi tentang mencapai kebebasan finansial, memiliki kontrol atas waktu, dan hidup sesuai dengan impian. Banyak orang bermimpi untuk menjadi kaya, tetapi hanya sedikit yang tahu bagaimana cara mencapainya. Mencapai kekayaan memerlukan waktu, komitmen, dan strategi jangka panjang. Berikut adalah beberapa langkah penting untuk memulai perjalanan Anda menuju kebebasan finansial:</p>
+
+            <h3>1. Tentukan Tujuan Keuangan yang Jelas</h3>
+            <p>Langkah pertama untuk menjadi kaya adalah memiliki tujuan yang jelas. Apakah tujuan Anda membeli rumah, memulai bisnis, atau mencapai kebebasan finansial? Tentukan angka yang Anda inginkan dan buatlah rencana yang spesifik untuk mencapainya. Tanpa tujuan yang jelas, Anda akan kesulitan untuk merencanakan langkah-langkah yang diperlukan dan tetap fokus pada perjalanan finansial Anda.</p>
+
+            <h3>2. Buat Rencana Keuangan yang Terperinci</h3>
+            <p>Tidak ada orang kaya yang tidak memiliki rencana keuangan. Setelah Anda memiliki tujuan, buatlah rencana yang mendetail. Ini termasuk menetapkan anggaran bulanan, menentukan berapa banyak uang yang perlu Anda tabung setiap bulan, dan merencanakan investasi. Juga, pastikan untuk mengelola utang dengan bijak, sehingga tidak menghalangi tujuan keuangan Anda.</p>
+
+            <h3>3. Bangun Pendapatan Pasif</h3>
+            <p>Salah satu cara terbaik untuk menjadi kaya raya adalah dengan menciptakan pendapatan pasif. Pendapatan pasif adalah uang yang terus mengalir tanpa Anda harus bekerja terus-menerus. Ini bisa datang dari berbagai sumber, seperti investasi di saham, properti, atau pendapatan dari bisnis yang dapat beroperasi tanpa keterlibatan langsung Anda. Semakin banyak pendapatan pasif yang Anda miliki, semakin mudah untuk mencapai kebebasan finansial.</p>
+
+            <h3>4. Investasikan Uang Anda dengan Bijak</h3>
+            <p>Salah satu faktor yang membedakan orang kaya dari orang biasa adalah kebiasaan mereka dalam berinvestasi. Orang kaya selalu mencari peluang untuk membuat uang mereka bekerja untuk mereka. Investasi di pasar saham, real estate, atau bisnis adalah cara yang efektif untuk mengembangkan uang Anda. Anda harus belajar tentang berbagai jenis investasi, risiko yang terkait, dan cara untuk membuat keputusan yang cerdas.</p>
+
+            <h3>5. Hindari Pengeluaran yang Tidak Perlu</h3>
+            <p>Banyak orang yang ingin menjadi kaya terjebak dalam pola konsumtif yang berlebihan. Menghabiskan uang untuk barang-barang yang tidak perlu hanya akan menghalangi pencapaian tujuan keuangan Anda. Prioritaskan pengeluaran Anda untuk hal-hal yang penting, seperti pendidikan, investasi, dan pengalaman yang dapat meningkatkan kualitas hidup Anda. Mengatur keuangan dengan bijak adalah langkah pertama untuk membangun kekayaan.</p>
+
+            <h3>6. Fokus pada Pendidikan dan Pengembangan Diri</h3>
+            <p>Pendidikan adalah investasi terbaik yang bisa Anda lakukan. Dengan mengembangkan keterampilan dan pengetahuan yang relevan, Anda akan lebih mudah mendapatkan peluang bisnis dan pekerjaan dengan penghasilan tinggi. Luangkan waktu untuk belajar tentang keuangan pribadi, investasi, dan keterampilan profesional lainnya yang dapat membuka jalan menuju kekayaan.</p>
+
+            <h3>7. Kembangkan Bisnis Anda</h3>
+            <p>Salah satu cara tercepat untuk menjadi kaya adalah dengan memulai bisnis. Memiliki bisnis sendiri memberi Anda kebebasan untuk mengontrol pendapatan Anda dan meningkatkan nilai yang Anda ciptakan. Dengan bisnis yang sukses, Anda dapat menghasilkan uang lebih banyak daripada hanya mengandalkan gaji bulanan. Tentukan niche yang Anda minati dan cari cara untuk menciptakan produk atau layanan yang dibutuhkan oleh pasar.</p>
+</div>
+        <head><meta name="google-adsense-account" content="ca-pub-5593469178249699">        
+        </head>
+            
+<!-- Artikel Pekerjaan Terbaik -->
+        <div id="article-kerja" class="content">
+            <h2>Pekerjaan Terbaik</h2>
+            <p>
+                Mencari pekerjaan terbaik bukan hanya tentang gaji, tetapi juga tentang keseimbangan hidup, kepuasan, dan peluang berkembang. 
+                Pekerjaan yang ideal adalah yang memungkinkan Anda untuk mencapai tujuan finansial dan pribadi tanpa mengorbankan kesehatan atau kebahagiaan Anda. 
+                Berikut adalah beberapa hal yang perlu Anda pertimbangkan ketika memilih pekerjaan terbaik untuk diri Anda:
+            </p>
+
+            <h3>1. Temukan Passion Anda</h3>
+            <p>
+                Pekerjaan terbaik adalah yang Anda nikmati dan merasa bermakna. Ketika Anda bekerja di bidang yang Anda sukai, Anda akan merasa termotivasi dan tidak terbebani dengan tugas sehari-hari. 
+                Cobalah untuk mengenali apa yang benar-benar Anda cintai, apakah itu teknologi, seni, pendidikan, atau bisnis. 
+                Temukan pekerjaan yang dapat memenuhi kebutuhan finansial Anda sekaligus memberi kepuasan pribadi.
+            </p>
+
+            <h3>2. Pekerjaan dengan Potensi Penghasilan Tinggi</h3>
+            <p>
+                Salah satu kunci untuk mencapai kebebasan finansial adalah memilih pekerjaan yang dapat memberi Anda penghasilan besar. 
+                Banyak karier di bidang teknologi, kesehatan, dan keuangan menawarkan potensi penghasilan yang signifikan. 
+                Misalnya, profesi seperti insinyur perangkat lunak, dokter spesialis, dan analis keuangan cenderung menawarkan gaji yang lebih tinggi dibandingkan pekerjaan lainnya. 
+                Pilihlah karier yang memiliki prospek penghasilan yang baik dan terus berkembang seiring waktu.
+            </p>
+
+            <h3>3. Pekerjaan dengan Fleksibilitas Waktu</h3>
+            <p>
+                Pekerjaan terbaik juga memberikan Anda fleksibilitas untuk mengatur waktu. Dengan fleksibilitas, Anda dapat menyeimbangkan pekerjaan dengan kehidupan pribadi, sehingga mengurangi stres. 
+                Beberapa pekerjaan di sektor teknologi atau bisnis memungkinkan Anda untuk bekerja dari rumah atau memiliki jam kerja yang lebih fleksibel, memberikan kontrol yang lebih besar atas waktu Anda.
+            </p>
+
+            <h3>4. Pekerjaan dengan Kesempatan untuk Berkembang</h3>
+            <p>
+                Pilihlah pekerjaan yang menawarkan kesempatan untuk belajar dan berkembang. Pekerjaan yang menyediakan pelatihan berkelanjutan, program pengembangan keterampilan, dan peluang untuk promosi akan memberi Anda keuntungan jangka panjang. 
+                Semakin banyak keterampilan yang Anda kuasai, semakin besar peluang Anda untuk naik ke posisi yang lebih tinggi atau mendapatkan gaji yang lebih besar.
+            </p>
+
+            <h3>5. Pekerjaan yang Sejalan dengan Nilai Anda</h3>
+            <p>
+                Pekerjaan terbaik adalah pekerjaan yang selaras dengan nilai dan tujuan hidup Anda. Jika Anda bekerja untuk perusahaan yang mendukung nilai yang Anda percayai, seperti keberlanjutan, inklusivitas, atau inovasi, 
+                Anda akan merasa lebih puas dan termotivasi untuk bekerja keras. Pastikan bahwa pekerjaan yang Anda pilih sesuai dengan prinsip hidup Anda untuk merasa lebih berarti.
+            </p>
+
+            <h3>6. Pekerjaan yang Menawarkan Stabilitas</h3>
+            <p>
+                Selain penghasilan, stabilitas pekerjaan juga sangat penting. Pilihlah pekerjaan yang memberikan keamanan finansial dalam jangka panjang, terutama jika Anda berencana membangun keluarga atau merencanakan masa depan. 
+                Pekerjaan di sektor yang berkembang pesat, seperti teknologi atau kesehatan, sering kali menawarkan stabilitas yang lebih baik dibandingkan dengan pekerjaan yang bergantung pada kondisi ekonomi yang fluktuatif.
+            </p>
+
+            <h3>7. Pekerjaan yang Memberi Dampak Positif</h3>
+            <p>
+                Pekerjaan terbaik adalah yang memberi dampak positif terhadap kehidupan orang lain atau masyarakat. Jika Anda bekerja di bidang yang berhubungan dengan kesehatan, pendidikan, atau pengembangan masyarakat, 
+                Anda akan merasa lebih puas karena Anda tahu pekerjaan Anda memberikan manfaat besar bagi orang lain. Banyak orang merasa lebih bahagia ketika mereka tahu pekerjaan mereka memberikan perubahan positif di dunia.
+            </p>
+
+            <h3>8. Pertimbangkan Karier Wirausaha</h3>
+            <p>
+                Jika Anda tertarik untuk mencapai kebebasan finansial dengan cara yang lebih langsung, mempertimbangkan untuk memulai bisnis atau berwirausaha bisa menjadi pilihan yang sangat baik. 
+                Dengan memiliki bisnis sendiri, Anda bisa mengontrol penghasilan dan keputusan yang dibuat, tetapi ini juga datang dengan risiko yang lebih besar. 
+                Namun, jika Anda memiliki ide yang inovatif dan kemampuan untuk mengelolanya, berwirausaha bisa memberikan kebebasan dan kepuasan yang luar biasa.
+            </p>
+
+            <h3>9. Pertimbangkan Aspek Kesehatan dan Keseimbangan</h3>
+            <p>
+                Pekerjaan terbaik tidak hanya soal uang, tetapi juga soal keseimbangan antara kehidupan kerja dan kehidupan pribadi. Jangan memilih pekerjaan yang akan mengorbankan kesehatan Anda atau kehidupan sosial Anda. 
+                Pastikan pekerjaan yang Anda pilih memungkinkan Anda memiliki waktu untuk berolahraga, bersosialisasi, dan melakukan kegiatan yang Anda nikmati di luar pekerjaan. 
+                Kesehatan fisik dan mental Anda sangat penting, dan pekerjaan terbaik adalah yang membantu Anda menjaga keduanya.
+            </p>
+
+            <h3>10. Evaluasi Secara Berkala</h3>
+            <p>
+                Pekerjaan terbaik bisa berubah seiring waktu, jadi penting untuk selalu mengevaluasi apakah pekerjaan yang Anda jalani masih sesuai dengan tujuan dan kebutuhan Anda. 
+                Jangan ragu untuk melakukan perubahan atau mencari peluang baru jika pekerjaan yang Anda lakukan sekarang tidak lagi memberi kepuasan atau kemajuan yang Anda inginkan. 
+                Beradaptasi dan terus mengevaluasi adalah bagian dari perjalanan menuju kebahagiaan dan kesuksesan.
+            </p>
+
+            <p>
+                Ingat, pekerjaan terbaik adalah yang membantu Anda mencapai tujuan finansial Anda, memberi kepuasan pribadi, dan memungkinkan Anda untuk hidup dengan seimbang dan bahagia. 
+                Jangan hanya fokus pada pekerjaan yang tampaknya bergaji tinggi, tetapi pastikan pekerjaan tersebut sejalan dengan nilai dan aspirasi hidup Anda.
+            </p>
+        </div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contoh Iklan dengan Tombol</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5593469178249699"
+        crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Tombol untuk menampilkan iklan -->
+    <button id="show-ad-btn">Tampilkan Iklan</button>
+
+    <!-- Tempat untuk menampilkan iklan -->
+    <div id="ad-container" style="margin-top: 20px; display: none;"></div>
+
+    <script>
+        // Ambil elemen tombol dan container iklan
+        const showAdBtn = document.getElementById('show-ad-btn');
+        const adContainer = document.getElementById('ad-container');
+
+        // Ketika tombol ditekan, tampilkan iklan
+        showAdBtn.addEventListener('click', function() {
+            // Menambahkan kode iklan ke dalam ad-container
+            adContainer.innerHTML = `
+                <ins class="adsbygoogle"
+                     style="display:block;"
+                     data-ad-client="ca-pub-5593469178249699"
+                     data-ad-slot="1234567890"
+                     data-ad-format="auto"></ins>
+            `;
+
+            // Meminta iklan untuk ditampilkan
+            (adsbygoogle = window.adsbygoogle || []).push({});
+
+            // Menampilkan container iklan
+            adContainer.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
